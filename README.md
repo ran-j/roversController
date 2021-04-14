@@ -4,3 +4,25 @@
 
 ![Coverage lines](https://img.shields.io/badge/Coverage:lines-100-green.svg)
 ![Coverage functions](https://img.shields.io/badge/Coverage:functions-100-green.svg)
+
+## Installation
+
+```bash
+$ npm install
+```
+
+## Running the app
+
+```bash 
+$ npm start
+```
+
+## Test
+
+```bash
+# unit tests
+$ npm run test
+
+# test coverage
+$ npm run test:coverage
+```
