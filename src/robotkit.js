@@ -63,7 +63,12 @@ class Rover {
         if (direction === undefined) throw new Error("Inform a direction")
         if (Object.prototype.toString.call(direction) === "[object String]") {
             if (direction.length === 0) throw new Error("Inform a direction")
-            direction = Directions[direction]
+            let translateFromStringToDirection = {}
+            Object.keys(Directions).forEach((str, index) => {
+                translateFromStringToDirection[str[0]] = index + 1
+            })
+            //direct tranform input string to direction Obj 
+            direction = translateFromStringToDirection[direction.toUpperCase()]
         }
         this.x = x;
         this.y = y;
@@ -84,11 +89,114 @@ class Rover {
      * Move Rouver to specific point
      *
      * @param {string} commands Comands for Rouver execute like "MMRMMRMRRM"
-     * @param {[number]} gridPoints (OPTIONAL) Rouver grid [maxX, maxY] 
      * @returns "X position Y position Direction"
      * @type String
      */
-    async move(commands, gridPoints = []) { }
+    async move(commands) {
+        //parse commands to be executed
+        const instructions = commands.split("").map((str) => str.toUpperCase())
+        //for each instruction execute an action
+        for (const instruction of instructions) {
+            switch (instruction) {
+                case 'M':
+                    this._moveForward(this.gridPoints[0], this.gridPoints[0]);
+                    break;
+                case 'L':
+                    this._Rotate90(Sides.Left);
+                    break;
+                case 'R':
+                    this._Rotate90(Sides.Right);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return this.getCurrentLocation()
+    }
+
+    /**
+     * Returns a min value if reverse is true if not returns the max value
+     *
+     * @param {Number} min The lower value
+     * @param {Number} max The upper value
+     * @param {boolean} reverse flag that indicates the operation
+     * @returns A number min or max value depending of reverse boolean
+     * @type Number
+     */
+    _transformValues(min, calc, reverse = false) {
+        if (reverse) {
+            return calc > min ? min : calc
+        } else {
+            return calc < min ? min : calc
+        }
+    }
+
+    /**
+     * Move rover according with direction
+     *
+     * @param {Number} maxX The max value of grid in x direction
+     * @param {Number} maxY The max value of grid in y direction
+     */
+    _moveForward(maxX, maxY) {
+        const minValue = 0;
+        const getMinValue = true
+        switch (this.currentDirection) {
+            case Directions.North:
+                this.y = this._transformValues(maxY, this.y + 1, getMinValue);
+                break;
+            case Directions.South:
+                this.y = this._transformValues(minValue, this.y - 1);
+                break;
+            case Directions.East:
+                this.x = this._transformValues(maxX, this.x + 1, getMinValue);
+                break;
+            case Directions.West:
+                this.x = this._transformValues(minValue, this.x - 1);
+                break;
+
+        }
+    }
+
+    /**
+     * Rotate rover according with direction
+     *
+     * @param {Sides} Side Determinate if rover should turn Right or Left
+     */
+    _Rotate90(Side = 0) {
+        switch (this.currentDirection) {
+            case Directions.North:
+                if (Side === Sides.Right) {
+                    this.currentDirection = Directions.East;
+                } else { //left 
+                    this.currentDirection = Directions.West;
+                }
+                break;
+            case Directions.South:
+                if (Side === Sides.Right) {
+                    this.currentDirection = Directions.West;
+                } else { //left 
+                    this.currentDirection = Directions.East;
+                }
+                break;
+            case Directions.East:
+                if (Side === Sides.Right) {
+                    this.currentDirection = Directions.South;
+                } else { //left 
+                    this.currentDirection = Directions.North;
+                }
+                break;
+            case Directions.West:
+                if (Side === Sides.Right) {
+                    this.currentDirection = Directions.North;
+                } else { //left 
+                    this.currentDirection = Directions.South;
+                }
+                break;
+            default:
+                console.warn("Wrong direction")
+                break;
+        }
+    }
 }
 
 module.exports = {
