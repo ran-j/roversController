@@ -33,7 +33,11 @@ class Rover {
      * @type String
      */
     getCurrentLocation() {
-        return ""
+        return [
+            this.x,
+            this.y,
+            Object.keys(Directions)[this.currentDirection - 1][0] // get A direction name from Directions object and get the first letter
+        ].join(" ")
     }
 
     /**
@@ -43,7 +47,7 @@ class Rover {
      * @type [number]
      */
     getCurrentGrid() {
-        return [];
+        return this.gridPoints;
     }
 
     /**
@@ -53,14 +57,28 @@ class Rover {
      * @param {number} y Rouver y position
      * @param {Directions} direction Rouver direction
      */
-    setPosition(x = 0, y = 0, direction) { }
+    setPosition(x = 0, y = 0, direction) {
+        if (x < 0) throw new Error("X must be positive")
+        if (y < 0) throw new Error("Y must be positive")
+        if (direction === undefined) throw new Error("Inform a direction")
+        if (Object.prototype.toString.call(direction) === "[object String]") {
+            if (direction.length === 0) throw new Error("Inform a direction")
+            direction = Directions[direction]
+        }
+        this.x = x;
+        this.y = y;
+        this.currentDirection = direction
+    }
 
     /**
      * Set Rouver grid
      *
      * @param {[number]} gridPoints Rouver grid [maxX, maxY] 
      */
-    setGrid(gridPoints = []) { }
+    setGrid(gridPoints = []) {
+        if (gridPoints.length > 2) throw new Error("Grid should only have 2 indexes")
+        this.gridPoints = gridPoints;
+    }
 
     /**
      * Move Rouver to specific point
