@@ -18,3 +18,7 @@ If robot is facing north and the first command is to turn Left the robot should 
 # Grid
 
 The robot should execute moviment greater them his grid.
+
+# Image 
+
+![draw](https://github.com/ran-j/roversController/blob/main/resources/img.png?raw=true)
