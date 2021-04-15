@@ -88,8 +88,9 @@ class RobotController {
      */
     async moveRobots() {
         try {
+            let index = -1
             for (const pathFile of this.pathsFiles) {
-                const index = this.pathsFiles.indexOf(pathFile);
+                index++
                 if (this.robots[index]) {
                     const data = await fsPromises.readFile(pathFile, 'utf8');
                     const inputs = data.split("\n")
