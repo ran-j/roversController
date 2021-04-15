@@ -26,3 +26,10 @@ $ npm run test
 # test coverage
 $ npm run test:coverage
 ```
+## Docs
+
+```bash
+# autogen docs
+$ ./node_modules/.bin/jsdoc -r -d ./docs ./src
+# see docs/index.html
+```
