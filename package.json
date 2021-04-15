@@ -1,6 +1,6 @@
 {
   "name": "roverscontroller",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "This algorithm should guide robotic rovers in mars through giving a grid and x y coordinates to moviment then.(This is repository is part of company test).",
   "main": "src/main.js",
   "scripts": {
