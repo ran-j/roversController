@@ -33,3 +33,9 @@ $ npm run test:coverage
 $ ./node_modules/.bin/jsdoc -r -d ./docs ./src
 # see docs/index.html
 ```
+
+## Others
+
+See what is the challenge [challenge.md](./resources/challenge.md).
+See How I solutionate the problem [solution.md](./resources/solution.md).
+See the manual [manual.md](./resources/manual.md).
