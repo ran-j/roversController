@@ -99,7 +99,7 @@ class Rover {
         for (const instruction of instructions) {
             switch (instruction) {
                 case 'M':
-                    this._moveForward(this.gridPoints[0], this.gridPoints[0]);
+                    this._moveForward(this.gridPoints[0], this.gridPoints[1]);
                     break;
                 case 'L':
                     this._Rotate90(Sides.Left);
