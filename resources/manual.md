@@ -26,4 +26,4 @@ $ Path file for robot 0: ./resources/paths.txt
 
 * Must have a grid value "5 5"
 * Must have a position "1 2 N"
-* Must have a commadn "LMLMLMLMM"
+* Must have a commad "LMLMLMLMM"
