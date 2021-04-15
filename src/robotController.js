@@ -106,7 +106,7 @@ class RobotController {
                         } else if (command.length > 0) { //command
                             const robotPosition = this.robots[index].getCurrentLocation()
                             const result = await this.robots[index].move(clearInput)
-                            console.log(`\n Robot: ${index} moved to from ${robotPosition} to ${result}`)
+                            console.log(`\n Robot: ${index} moved from ${robotPosition} to ${result}`)
                         }
                     }
                     console.log("\n Done executing")
